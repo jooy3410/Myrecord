@@ -8,4 +8,8 @@ app.get('/', (req, res) => {
 app.get('/join', (req, res) => {
   res.render('user/join.ejs')
 })
+
+app.post('/join_result', (req,res) =>{
+  res.redirect()
+})
 module.exports = app;
