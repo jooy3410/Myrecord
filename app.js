@@ -12,6 +12,23 @@ app.set('view engine', 'ejs');
 
 //database setting
 
+const connection = mysql.createConnection({
+	host: '',
+    port: '',
+    user: '',
+    password: '',
+	database: ''
+});
+
+
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... \n\n");
+} else {
+    console.log("Error connecting database ... \n\n");
+}
+});
+
 //routes setup
 var user = require('./routes/user.js');
 
