@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const router = express.Router();
 const path = require('path');
-const mysql = require("mysql");
+const mysql = require("mysql"); //mysql 모듈 로드
 
 app.set('port', process.env.PORT || 3000)
 
@@ -13,11 +13,11 @@ app.set('view engine', 'ejs');
 //database setting
 
 const connection = mysql.createConnection({
-	host: '',
-    port: '',
-    user: '',
-    password: '',
-	database: ''
+    host: '127.0.0.1',
+    port : '3306',
+    user: 'root',
+    password: 'abcd1234',
+    database: 'TEST_DB'
 });
 
 
@@ -26,6 +26,7 @@ if(!err) {
     console.log("Database is connected ... \n\n");
 } else {
     console.log("Error connecting database ... \n\n");
+    console.log(err)
 }
 });
 
