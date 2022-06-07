@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const mysql = require("mysql");
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -10,6 +11,7 @@ app.get('/join', (req, res) => {
 })
 
 app.post('/join_result', (req,res) =>{
+  
   res.redirect()
 })
 module.exports = app;
