@@ -33,12 +33,15 @@ app.get('/join', (req, res) => {
 app.post("/join_result", function(req,res){
   console.log(req.body)
   console.log(req.body.email)
+  console.log("회원가입 시작")
   const email = req.body.email;
   const user_name = req.body.user_name;
   const user_pw = req.body.user_pw;
+
+  console.log(email)
   
 
-  var sql= "INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ('email', 'user_name', 'user_pw');"
+  var sql= 'INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ("' + email + '", "' + user_name + '", "' + user_pw +'");'
 
   connection.query(sql,function(err){
       // connection.end();
