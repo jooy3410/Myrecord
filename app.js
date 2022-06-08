@@ -2,7 +2,9 @@ const express = require('express')
 const app = express()
 const router = express.Router();
 const path = require('path');
-const mysql = require("mysql"); //mysql 모듈 로드
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');//로그 찍어주는 모듈
 
 app.set('port', process.env.PORT || 3000)
 
@@ -12,23 +14,13 @@ app.set('view engine', 'ejs');
 
 //database setting
 
-const connection = mysql.createConnection({
-    host: '127.0.0.1',
-    port : '3306',
-    user: 'root',
-    password: 'abcd1234',
-    database: 'TEST_DB'
-});
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 
-connection.connect(function(err){
-if(!err) {
-    console.log("Database is connected ... \n\n");
-} else {
-    console.log("Error connecting database ... \n\n");
-    console.log(err)
-}
-});
+
 
 //routes setup
 var user = require('./routes/user.js');

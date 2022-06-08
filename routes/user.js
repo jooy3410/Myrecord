@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
-
+const bodyParser = require('body-parser');
+const qs = require('qs');
+const mysql = require("mysql"); //mysql 모듈 로드
 const connection = mysql.createConnection({
   host: '127.0.0.1',
   port : '3306',
@@ -9,6 +10,16 @@ const connection = mysql.createConnection({
   password: 'abcd1234',
   database: 'TEST_DB'
 });
+
+
+connection.connect(function(err){
+  if(!err) {
+      console.log("Database is connected ... \n\n");
+  } else {
+      console.log("Error connecting database ... \n\n");
+      console.log(err)
+  }
+  });
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -18,15 +29,30 @@ app.get('/join', (req, res) => {
   res.render('user/join.ejs')
 })
 
-app.post('/join_result', (req,res) =>{
+
+app.post("/join_result", function(req,res){
+
+  console.log(req);
   const email = req.body.email;
   const user_name = req.body.user_name;
   const user_pw = req.body.user_pw;
+  console.log(res.body.email);
 
   connection.query(
-    "INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ('email', 'user_name', 'user_pw');"
+    "INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ('email', 'user_name', 'user_pw');",
+    function(err, rows){
+      // connection.end();
+      if(!err){
+        res.send('success');
+        // console.log(rows);
+      }
+      else{
+        console.log(err)
+      }
+    }
   )
-  
-  res.send()
 })
+
+
+
 module.exports = app;
