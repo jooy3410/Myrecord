@@ -31,16 +31,16 @@ app.get('/join', (req, res) => {
 
 
 app.post("/join_result", function(req,res){
-
-  console.log(req);
+  console.log(req.body)
+  console.log(req.body.email)
   const email = req.body.email;
   const user_name = req.body.user_name;
   const user_pw = req.body.user_pw;
-  console.log(res.body.email);
+  
 
-  connection.query(
-    "INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ('email', 'user_name', 'user_pw');",
-    function(err, rows){
+  var sql= "INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ('email', 'user_name', 'user_pw');"
+
+  connection.query(sql,function(err){
       // connection.end();
       if(!err){
         res.send('success');
