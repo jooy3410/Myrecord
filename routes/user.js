@@ -21,16 +21,18 @@ connection.connect(function(err){
   }
   });
 
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
+//회원가입 페이지
 app.get('/join', (req, res) => {
   res.render('user/join.ejs')
 })
 
-
-app.post("/join_result", function(req,res){
+//회원정보 저장
+app.post("/join_result", (req,res) => {
   console.log(req.body)
   console.log(req.body.email)
   console.log("회원가입 시작")
@@ -43,8 +45,8 @@ app.post("/join_result", function(req,res){
 
   var sql= 'INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ("' + email + '", "' + user_name + '", "' + user_pw +'");'
 
-  connection.query(sql,function(err){
-      // connection.end();
+  connection.query(sql, (err) => {
+      
       if(!err){
         res.send('success');
         // console.log(rows);
@@ -55,6 +57,8 @@ app.post("/join_result", function(req,res){
     }
   )
 })
+
+
 
 
 
