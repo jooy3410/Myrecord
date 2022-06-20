@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const qs = require('qs');
 const mysql = require("mysql"); //mysql 모듈 로드
+const crypto = require("crypto") // 비밀번호 암호화
+
 const connection = mysql.createConnection({
   host: '127.0.0.1',
   port : '3306',
@@ -38,7 +40,11 @@ app.post("/join_result", (req,res) => {
   console.log("회원가입 시작")
   const email = req.body.email;
   const user_name = req.body.user_name;
-  const user_pw = req.body.user_pw;
+  let user_pw = req.body.user_pw;
+
+  let encrypt = crypto.createHash("sha256")
+  encrypt.update(user_pw)
+  user_pw = encrypt.digest("hex")
 
   console.log(email)
   
