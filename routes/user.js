@@ -59,6 +59,7 @@ app.post("/join_result", (req,res) => {
       }
       else{
         console.log(err)
+        res.send(err);
       }
     }
   )
