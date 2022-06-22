@@ -5,3 +5,7 @@ CREATE TABLE USER_INFO (
     USER_NAME VARCHAR(50) NOT NULL,
     USER_PW VARCHAR(50) NOT NULL
 );
+
+
+--user_info 테이블의 user_pw 컬럼 길이 변경
+alter table USER_INFO modify column USER_PW varchar(100);
