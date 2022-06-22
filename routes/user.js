@@ -66,6 +66,11 @@ app.post("/join_result", (req,res) => {
 })
 
 
+//로그인 페이지
+app.get("/login", (req,res) => {
+  res.render('user/login.ejs')
+})
+
 
 
 
