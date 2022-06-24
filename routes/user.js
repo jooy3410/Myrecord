@@ -3,7 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const qs = require('qs');
 const mysql = require("mysql"); //mysql 모듈 로드
-const crypto = require("crypto") // 비밀번호 암호화
+const crypto = require("crypto"); // 비밀번호 암호화
+const { Console } = require("console");
 
 const connection = mysql.createConnection({
   host: '127.0.0.1',
@@ -46,7 +47,7 @@ app.post("/join_result", (req,res) => {
   encrypt.update(user_pw)
   user_pw = encrypt.digest("hex")
 
-  console.log(email)
+  console.log('회원가입 쿼리 시작')
   
 
   var sql= 'INSERT INTO USER_INFO(USER_EMAIL, USER_NAME, USER_PW) VALUES ("' + email + '", "' + user_name + '", "' + user_pw +'");'
@@ -54,12 +55,23 @@ app.post("/join_result", (req,res) => {
   connection.query(sql, (err) => {
       
       if(!err){
-        res.send('success');
+        console.log('회원가입 성공');
+        // res.send('success');
+        res.render('redirect.ejs', {
+          message : '회원가입에 성공했습니다.',
+          url : '/user/login'
+        })
         // console.log(rows);
       }
       else{
+        console.log('회원가입 싫패')
         console.log(err)
-        res.send(err);
+
+        // res.send(err);
+        res.render('redirect.ejs', {
+          message : '회원가입에 실패했습니다.',
+          url : '/user/join'
+        })
       }
     }
   )
