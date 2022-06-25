@@ -83,6 +83,9 @@ app.get("/login", (req,res) => {
   res.render('user/login.ejs')
 })
 
+app.post("/login_result", (req,res) => {
+  
+})
 
 
 
