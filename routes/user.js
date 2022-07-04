@@ -84,7 +84,7 @@ app.get("/login", (req,res) => {
 })
 
 app.post("/login_result", (req,res) => {
-  
+  res.render("")
 })
 
 
