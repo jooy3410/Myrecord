@@ -6,6 +6,10 @@ CREATE TABLE USER_INFO (
     USER_PW VARCHAR(50) NOT NULL
 );
 
+--비밀버호 플러그인 변경 쿼리
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '사용할 비밀번호';
+
 
 --user_info 테이블의 user_pw 컬럼 길이 변경
 alter table USER_INFO modify column USER_PW varchar(100);
+
